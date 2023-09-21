@@ -1,0 +1,202 @@
+<!-- HTML 코드 -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="./include.js" defer></script>
+
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Untree.co">
+		<link rel="shortcut icon" href="favicon.png">
+
+		<meta name="description" content="" />
+		<meta name="keywords" content="bootstrap, bootstrap5" />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" href="fonts/icomoon/style.css">
+		<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+		<link rel="stylesheet" href="css/tiny-slider.css">
+		<link rel="stylesheet" href="css/aos.css">
+		<link rel="stylesheet" href="css/flatpickr.min.css">
+		<link rel="stylesheet" href="css/glightbox.min.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<script>
+			(function() {
+				// 다른 코드들
+
+				function handleFormSubmit(event) {
+					event.preventDefault();
+					var form = event.target;
+					var formData = getFormData(form);
+					var data = formData.data;
+					var thankYouMessage = form.querySelector(".thankyou_message");
+
+					// 추가: 알림창 표시
+					function showAlert(message) {
+						alert(message);
+					}
+
+					// 추가: 폼 제출 결과에 따른 알림창 표시
+					function handleSubmissionResult(responseText) {
+						if (responseText.indexOf("메일 전송에 성공") !== -1) {
+							showAlert("메시지 보내기에 성공했습니다. 확인 후 회신 드리겠습니다.");
+						} else {
+							showAlert("메시지 보내기에 실패했습니다. 다시 시도해주세요.");
+						}
+					}
+
+					if (formData.honeypot) {
+						return false;
+					}
+
+					disableAllButtons(form);
+					var url = form.action;
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', url);
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState === 4 && xhr.status === 200) {
+							form.reset();
+							var formElements = form.querySelector(".form-elements");
+							if (formElements) {
+								formElements.style.display = "none";
+							}
+							if (thankYouMessage) {
+								thankYouMessage.style.display = "block";
+								handleSubmissionResult(xhr.responseText);
+							}
+						}
+					};
+
+					var encoded = Object.keys(data).map(function(k) {
+						return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+					}).join('&');
+
+					xhr.send(encoded);
+				}
+
+				// 다른 코드들
+			})();
+
+		</script>
+
+
+		<title>HTCore</title>
+	</head>	
+	<body>
+		<header data-include="./include/header.html"></header>
+
+		<div class="hero overlay">
+			<div class="container">
+				<div class="row align-items-center justify-content-start">
+					<div class="col-lg-6 mx-auto text-center">
+						<h1 class="heading" data-aos="fade-up">Contact</h1>
+						<p data-aos="fade-up" style="font-size: medium;">(주)에이치티코어는 항상 고객의 소리에 귀기울이며 질좋은 서비스로 보답하겠습니다.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-12" data-aos="fade-up" data-aos-delay="0">
+						<h2 class="heading mb-5">Get In Touch</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+						<div class="contact-info">
+
+							<div class="address mt-4">
+								<i class="icon-room"></i>
+								<h4 class="mb-2">Location:</h4>
+								<p>광주광역시 동구 필문대로 303</p>
+							</div>
+
+							<div class="open-hours mt-4">
+								<i class="icon-clock-o"></i>
+								<h4 class="mb-2">Open Hours:</h4>
+								<p>
+									Sunday-Friday:<br>
+									9:00 AM - 18:00 PM
+								</p>
+							</div>
+
+							<div class="email mt-4">
+								<i class="icon-envelope"></i>
+								<h4 class="mb-2">Email:</h4>
+								<p>htcore1004@gmail.com</p>
+							</div>
+
+							<div class="phone mt-4">
+								<i class="icon-phone"></i>
+								<h4 class="mb-2">Call:</h4>
+								<p>062-220-3815</p>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+						<form id="emailForm" method="POST" data-email="" action="https://script.google.com/macros/s/AKfycbyl1HwTHu96fYe1a1meETZ4u5ijkdHq_YTopmKwPynaRmer_AviYibdbdhEydMIAEXF/exec" class="gform">
+							<!-- 폼 내용 -->
+							<div class="row">
+								<div class="col-6 mb-3">
+									<input type="text" class="form-control" id="senderName" name="senderName" placeholder="Your Name" required>
+								</div>
+								<div class="col-6 mb-3">
+									<input type="email" class="form-control" id="senderEmail" name="senderEmail" placeholder="Your Email" required>
+								</div>
+								<div class="col-12 mb-3">
+									<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+								</div>
+								<div class="col-12 mb-3">
+									<textarea id="message" name="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
+								</div>
+
+								<div class="col-12">
+									<input  type="submit" value="Send Message" class="btn btn-primary" href="mailto:htcore1004@gmail.com">
+								</div>
+							</div>
+
+							<div style="display:none" class="thankyou_message">
+								<!-- You can customize the thankyou message by editing the code below -->
+								<h2>메일이 성공적으로 전송되었습니다.</h2>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer data-include="./include/footer.html"></footer>
+
+		<!-- Preloader -->
+		<div id="overlayer"></div>
+		<div class="loader">
+			<div class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">Loading...</span>
+			</div>
+		</div>
+
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/aos.js"></script>
+		<script src="js/navbar.js"></script>
+		<script src="js/counter.js"></script>
+		<script src="js/rellax.js"></script>
+		<script src="js/flatpickr.js"></script>
+		<script src="js/glightbox.min.js"></script>
+		<script src="js/custom.js"></script>
+
+		<script data-cfasync="false" type="text/javascript"
+		src="https://cdn.rawgit.com/dwyl/html-form-send-email-via-google-script-without-server/master/form-submission-handler.js"></script>
+	</body>
+</html>
