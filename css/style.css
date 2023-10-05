@@ -10699,3 +10699,12 @@ img {
   padding: 40px 0 0 66px;
   font-size: 1.1em;
 }
+
+.bar {
+  float:left;
+  background-color: #E30613;
+  width: 5px;
+  height: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
